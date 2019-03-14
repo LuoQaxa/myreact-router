@@ -18,6 +18,12 @@
 
    componentDidMount() {
     history._bindPopState();
+    // history 要监听route的变化，如果改变了之后就执行回调函数
+    history.listen((currentPath) => {
+      this.setState({
+        path: currentPath
+      })
+    })
    }
    
    render() {

@@ -8,14 +8,19 @@ export default class Route extends Component {
     const { path, component } = this.props;
     return (
       <RouterContext.Consumer>
-        {/* {
+        {
           (value) => {
-            console.log('Consumer value is', value);
+            
             return (
-              React.createElement(component)
+              <div>
+                {
+                  value.path === path ? React.createElement(component) : null
+                }
+              </div>
+              
             )
           }
-        } */}
+        }
       </RouterContext.Consumer>
     )
   }

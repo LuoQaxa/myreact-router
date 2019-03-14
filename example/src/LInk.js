@@ -6,6 +6,7 @@ export default class Link extends Component {
     const { to } = this.props;
     e.preventDefault();
     history.go(to);
+    // 点击了link之后，没有更新视图
   }
   render() {
     return (

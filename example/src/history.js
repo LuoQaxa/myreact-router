@@ -3,14 +3,22 @@
 class History {
   constructor() {
     this._bindPopState();
-    this.routes = [];
-    // []
+    this.listens = [];
   }
-  // 什么时候注册
-  
+  // 注册回调
+  listen(cb) {
+    this.listens.push(cb);
+  }
+
   go(path) {
     history.pushState({path: path}, null, path);
-    this.routes[path] && this.routes[path]();
+    this.notify(path);
+  }
+  // 触发回调
+  notify(path) {
+    this.listens.forEach(listen => {
+      listen(path)
+    })
   }
   
   /**
@@ -20,7 +28,7 @@ class History {
     window.addEventListener('popstate', e => {
       console.log('popstate run')
       const path = e.state && e.state.path;
-      this.routes[path] && this.routes[path]();
+      // this.routes[path] && this.routes[path]();
     });
   }
 }
